@@ -1,0 +1,116 @@
+{% extends '/layout/main.html' %}
+{% set title = 'Absen' %}
+{% set page_active = 'absen' %}
+
+{% block _style %}
+<style>
+    .select2-dropdown {
+        z-index: 9001 !important;
+      }
+    .mahasiswa {
+        z-index: 9001;
+    }
+</style>
+{% endblock %}
+
+{% block _content %}
+
+<div class="row mt-4">
+    <div class="col-12 mb-4">
+        <h1 class="display-6">Daftar Jadwal Kuliah</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#jadwal_kuliah">
+            Tambah Jadwal
+        </button>
+
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Mata Kuliah</th>
+                    <th scope="col">Hari</th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Tempat</th>
+                    <th scope="col">Aksi</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="jadwal_kuliah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Jadwal Kuliah</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="post">
+                <div class="modal-body">
+                    <div class="mb-1">
+                        <label for="mata_kuliah" class="form-label">Mata Kuliah</label>
+                        <input type="text" class="form-control" id="mata_kuliah" name="mata_kuliah" placeholder="Masukkan Mata Kuliah" required>                        
+                    </div>
+                    <div class="mb-1">
+                        <label for="hari" class="form-label">Hari</label>
+                        <input type="text" class="form-control" id="hari" name="hari" placeholder="Masukkan hari" required>                        
+                    </div>
+                    <div class="mb-1">
+                        <label for="tanggal" class="form-label">Tanggal</label>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Masukkan tanggal" required>                        
+                    </div>
+                    <div class="mb-1">
+                        <label for="mahasiswa" class="form-label">Mahasiswa</label>
+                        
+                        <select class="form-select"  aria-label="Default select example" id="mahasiswa" name="mahasiswa[]" >
+                            <option disabled>--Pilih Satu--</option>
+                            {% for dt in data %}
+                            <option value="{{ dt.nama_lengkap }}">{{ dt.nama_lengkap }}</option>
+                            {% endfor %}
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block _script %}
+<script>
+    $(document).ready(function() {
+        $('.mahasiswa').select2({
+            dropdownParent: $("#jadwal_kuliah") 
+        });
+    });
+    function deleteJurusan(uid) {
+        var hapus = confirm('Apakah anda yakin hapus Jurusan ?')
+        if (hapus) {
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('jurusanapp.delete_jurusan') }}",
+                data: { "uid": uid },
+                success: function () {
+                    location.reload()
+
+                }
+            })
+        }
+    }
+</script>
+{% endblock %}

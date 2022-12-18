@@ -1,0 +1,27 @@
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Core</div>
+                <a class="nav-link" href="/">
+                    <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                    Dashboard
+                </a>
+                <a class="nav-link {% if page_active == 'mahasiswa' %} active {% endif %}" href="{{ url_for('mhsapp.mahasiswa') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                    Mahasiswa
+                </a>
+                <a class="nav-link {% if page_active == 'jurusan' %} active {% endif %}" href="{{ url_for('jurusanapp.jurusan') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-document"></i></div>
+                    Jurusan
+                </a>
+                
+                
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Logged in as:</div>
+            {{ session.user.nama_lengkap or 'Belum Memiliki Nama' }}
+        </div>
+    </nav>
+</div>

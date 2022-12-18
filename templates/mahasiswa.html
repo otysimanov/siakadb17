@@ -1,0 +1,71 @@
+{% extends '/layout/main.html' %}
+{% set title = 'Daftar Mahasiswa' %}
+{% set page_active = 'mahasiswa' %}
+
+{% block _style %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block _content %}
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h1 class="display-6">Daftar Mahasiswa</h1>
+            <br>
+            <a href="/mahasiswa/tambah" class="btn btn-success">Tambah Mahasiswa</a>
+            
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">foto</th>
+                        <th scope="col">Nama Lengkap</th>
+                        <th scope="col">NIM</th>
+                        <th scope="col">Jurusan</th>
+                        <th>Status</th>
+                        <th scope="col">Aksi</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dt in data %}
+                    <tr>
+                        <th scope="row" class="align-middle">{{ loop.index }}</th>
+                        <td>
+                            <a href="{{ dt.foto }}" target="_blank">
+                                <img src="{{ dt.foto or '/img/default.jpg' }}" alt="foto" width="60px" class="rounded-circle">
+                            </a>
+                        </td>
+                        <td class="align-middle">{{ dt.nama_lengkap }}</td>
+                        <td class="align-middle">{{ dt.nim }}</td>
+                        <td class="align-middle">
+                            {{ dt.jurusan }}
+                        </td>
+                        <td class="align-middle">
+                            {% if dt.is_active == true %}
+                            <span class="badge badge-pill bg-success">Aktif</span>
+                            {% else %}
+                            <span class="badge badge-pill bg-danger">Tidak Aktif</span>
+                            {% endif %}
+                        </td>
+                        <td class="align-middle">
+                            <a href="/mahasiswa/{{ dt.id }}" class="btn btn-success btn-sm">Lihat</a>
+                            <a href="/mahasiswa/edit/{{ dt.id }}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/mahasiswa/delete/{{ dt.id }}" class="btn btn-danger btn-sm">Hapus</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
