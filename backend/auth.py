@@ -43,7 +43,7 @@ def login():
     # flash return
     if 'user' in session:
         return redirect(url_for('mhsapp.mahasiswa'))
-    return render_template('login.html')
+    return render_template('auth/login.html')
 
 @authapp.route('/logout')
 def logout():
@@ -85,4 +85,4 @@ def register():
         flash('Berhasil Register', 'success')
         # return to login
         return redirect(url_for('authapp.login'))
-    return render_template('register.html')
+    return render_template('auth/register.html')

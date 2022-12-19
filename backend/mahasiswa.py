@@ -21,7 +21,7 @@ def mahasiswa():
         daftar_mahasiswa.append(mhs)
         
     
-    return render_template('mahasiswa.html', data=daftar_mahasiswa)
+    return render_template('mahasiswa/mahasiswa.html', data=daftar_mahasiswa)
 
 @mhsapp.route('/mahasiswa/delete/<uid>')
 @login_required
@@ -37,7 +37,7 @@ def hapus_mahasiswa(uid):
 def lihat_mahasiswa(uid):
     # mendapatkan data berdasarkan id
     mhs = db.collection('mahasiswa').document(uid).get().to_dict()
-    return render_template('lihat_mahasiswa.html', data=mhs)
+    return render_template('mahasiswa/lihat_mahasiswa.html', data=mhs)
 
 @mhsapp.route('/mahasiswa/tambah', methods=['POST', 'GET'])
 @login_required
@@ -75,7 +75,7 @@ def tambah_mahasiswa():
         flash('Berhasil Menambahkan Mahasiswa', 'success')
         return redirect(url_for('.mahasiswa'))
     jurusan = get_all_collection('jurusan')
-    return render_template('tambah_mahasiswa.html', jurusan=jurusan)
+    return render_template('mahasiswa/tambah_mahasiswa.html', jurusan=jurusan)
 
 @mhsapp.route('/mahasiswa/edit/<uid>', methods=['POST', 'GET'])
 @login_required
@@ -86,4 +86,4 @@ def edit_mahasiswa(uid):
         # kembali ke halaman mahasiswa
         return "oke"
     mhs = db.collection('mahasiswa').document(uid).get().to_dict()
-    return render_template('edit_mahasiswa.html', data=mhs)
+    return render_template('mahasiswa/edit_mahasiswa.html', data=mhs)

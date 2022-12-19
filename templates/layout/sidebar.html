@@ -12,8 +12,12 @@
                     Mahasiswa
                 </a>
                 <a class="nav-link {% if page_active == 'jurusan' %} active {% endif %}" href="{{ url_for('jurusanapp.jurusan') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-document"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Jurusan
+                </a>
+                <a class="nav-link {% if page_active == 'absen' %} active {% endif %}" href="{{ url_for('absenapp.absensi') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-days"></i></div>
+                    Absensi
                 </a>
                 
                 

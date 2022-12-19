@@ -20,9 +20,9 @@ app.register_blueprint(absenapp)
 def index():
     return redirect(url_for('authapp.login'))
 
-@app.route('/cek_session')
-def cek_session():
-    return jsonify(session['user'])
+# @app.route('/cek_session')
+# def cek_session():
+#     return jsonify(session['user'])
 
 
 if __name__ == '__main__':
